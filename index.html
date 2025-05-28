@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS油条下载站</title>
+    <style>
+        /* body样式 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* 备用背景色 */
+            background-image: url('https://www.loliapi.com/acg/'); /* 背景api */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 遮罩层 */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2); /* 遮罩 */
+            z-index: -2;
+        }
+
+        /* 主界面容器 */
+        .main-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3); /* 半透明白色背景Good */
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px); /* 亚克力板Good */
+            -webkit-backdrop-filter: blur(10px); /* 兼容Safari */
+            margin: 20px 0;
+            z-index: 1;
+        }
+
+        header {
+            background-color: transparent;
+            color: #333;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 20px 0;
+            flex: 1;
+        }
+
+        .download-section, .about-section {
+            background-color: transparent;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+        .download-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .download-section li {
+            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.6); /* 更透明背景 */
+        }
+
+        .download-item {
+            padding: 15px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .download-item:hover {
+            background-color: rgba(241, 241, 241, 0.8);
+        }
+
+        .download-item::after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .download-item.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .download-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: rgba(250, 250, 250, 0.7); /* 更透明背景 */
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .download-details-content {
+            padding: 10px 15px;
+            overflow-y: auto;
+            max-height: 200px; /* 最大高度启用滚动 */
+        }
+
+        .download-details a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .download-details a:hover {
+            background-color: #e8e8e8;
+        }
+
+        footer {
+            background-color: rgba(221, 221, 221, 0.7); /* 更透明的背景 */
+            color: #333;
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .download-item {
+                padding: 20px;
+            }
+
+            .download-details a {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <h1>🤓NAS油条下载站🤓</h1>
+        </header>
+        <main>
+            <section class="download-section">
+                <h2>下载资源</h2>
+                <ul>
+                    <li>
+                        <div class="download-item" onclick="toggleDetails(this)">
+                            Linux_Termux工具箱
+                            <div class="download-details">
+                                <div class="download-details-content">
+                                    <p>在终端中执行以下命令以安装：</p>
+                                    <pre>bash -c "$(curl -L linux.class2.icu/shell/nasyt.sh)"</pre>
+                                    <a href="shell/nasyt.sh" download>下载脚本</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="download-item" onclick="toggleDetails(this)">
+                            NAS油条APP
+                            <div class="download-details">
+                                <p>当前版本1.19.6</p>
+                                <div class="download-details-content">
+                                    <a href="APP/NAS油条APP.apk" download>暂无</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="download-item" onclick="toggleDetails(this)">
+                            下载sfs_linux_server
+                            <div class="download-details">
+                                <p>SFS多人游戏服务端</>
+                                <div class="download-details-content">
+                                    <a href="SFS/sfs_linux_server" download>暂无</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="download-item" onclick="toggleDetails(this)">
+                            暂无
+                            <div class="download-details">
+                                <p>暂无</>
+                                <div class="download-details-content">
+                                   <a href="/暂无" download>暂无</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="about-section">
+                <h2>关于我们</h2>
+                <p>本网站由NAS油条制作<br>欢迎加入NAS油条技术交流群<br>有什么技术问题可以进来交流<br>QQ群:610699712</p>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 by NAS油条. 版权所有.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleDetails(element) {
+            // 获取所有下载项
+            const allItems = document.querySelectorAll('.download-item');
+            allItems.forEach(item => {
+                const details = item.querySelector('.download-details');
+                if (item !== element) {
+                    details.style.maxHeight = null;
+                    item.classList.remove('active');
+                }
+            });
+
+            // 切换点击的折叠内容
+            const details = element.querySelector('.download-details');
+            if (details.style.maxHeight) {
+                details.style.maxHeight = null;
+            } else {
+                details.style.maxHeight = details.scrollHeight + "px";
+            }
+            element.classList.toggle('active');
+        }
+
+        // 防折叠内容关闭
+        document.querySelectorAll('.download-details').forEach(details => {
+            details.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
